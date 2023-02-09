@@ -116,14 +116,15 @@ frappe.ui.form.Control = class BaseControl {
 
 		let value = frappe.model.get_value(this.doctype, this.docname, this.df.fieldname);
 		value = this.get_parsed_value(value);
-
+		
 		// hide if no value
 		if (
 			this.doctype &&
 			status === "Read" &&
 			!this.only_input &&
 			is_null(value) &&
-			!in_list(["HTML", "Image", "Button"], this.df.fieldtype)
+			!in_list(["HTML", "Image", "Button"], this.df.fieldtype) &&
+			this.df.hide_if_no_value
 		) {
 			// eslint-disable-next-line
 			if (explain) console.log("By Hide Read-only, null fields: None"); // eslint-disable-line no-console
